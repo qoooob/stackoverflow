@@ -5,13 +5,12 @@ feature 'Signing in', %q{
   As an user
   I want to be able to sign in
 } do
-
-  # given!(:user) { create(:user) }
+  # given c ! выполняется перед каждым блоком
+  given!(:user) { create(:user) }
 
   scenario 'Existing user tries to sign in' do
-    User.create(email: 'user@test.com', password: '12345678')
     visit new_user_session_path
-    fill_in 'Email', with: 'user@test.com'
+    fill_in 'Email', with: user.email
     fill_in 'Password', with: '12345678'
     click_on 'Log in'
 
