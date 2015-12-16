@@ -5,7 +5,7 @@ feature 'Show question', %q{
   I want to be able to see all questions
   } do
 
-  given!(:question) { create(:question) }
+  given!(:question) { create_list(:question) }
 
   scenario 'Any user can see all question' do
 
