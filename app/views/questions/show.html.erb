@@ -1,6 +1,10 @@
 <h1><%= @question.title %></h1>
 <p><%= @question.body %></p>
 
+<% if current_user && current_user.author_of?(@question) %>
+<p><%= link_to 'Delete', @question, method: :delete %></p>
+<% end %>
+
 <% @question.answers.each do |answer| %>
 <p><%= answer.body %></p>
 <% end %>
