@@ -5,8 +5,13 @@
 <p><%= link_to 'Delete', @question, method: :delete %></p>
 <% end %>
 
-<% @question.answers.each do |answer| %>
-<p><%= answer.body %></p>
-<% end %>
+<div class="answers">
+  <p class="answers-count">Answers count: <%= @question.answers.count %></p>
+      <%= render @question.answers %>
+</div>
 
-<%= link_to 'Answer the question', new_question_answer_path(@question) %>
+<%= form_for [@question, Answer.new], remote: true do |f| %>
+    <%= f.label :body, 'Your answer' %>
+    <%= f.text_field :body %>
+    <%= f.submit 'Create answer' %>
+<% end %>

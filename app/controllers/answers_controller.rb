@@ -7,12 +7,12 @@ class AnswersController < ApplicationController
   end
 
   def create
-    @answer = @question.answers.new(answer_params)
-    if @answer.save
-      redirect_to question_path(@question), notice: 'Your answer successfully create'
-    else
-      render :new
-    end
+    @answer = @question.answers.create(answer_params)
+    # if @answer.save
+    #    redirect_to question_path(@question), notice: 'Your answer successfully create'
+    # else
+    #   render :'questions/show'
+    # end
   end
 
   private
