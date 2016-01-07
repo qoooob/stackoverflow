@@ -2,7 +2,8 @@
 <p><%= @question.body %></p>
 
 <% if current_user && current_user.author_of?(@question) %>
-<p><%= link_to 'Delete', @question, method: :delete %></p>
+  <p><%= link_to 'Edit Question', edit_question_path(@question) %> |
+  <%= link_to 'Delete', @question, method: :delete %></p>
 <% end %>
 
 <!--<div class="answers">-->
@@ -14,7 +15,8 @@
     <p><%= answer.body %></p>
 
     <% if current_user && current_user.author_of?(answer) %>
-      <p><%= link_to 'Delete Answer', answer, method: :delete %></p>
+      <p><%= link_to 'Edit Answer', edit_answer_path(answer) %> |
+      <%= link_to 'Delete Answer', answer, method: :delete %></p>
     <% end %>
 <% end %>
 

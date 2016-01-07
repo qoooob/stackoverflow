@@ -8,11 +8,10 @@ feature 'Delete Answer' do
   scenario 'Author can delete his answer' do
     login(user)
     visit question_path(question)
-    save_and_open_page
 
     click_on "Delete Answer"
 
-    expect(current_path).to eq questions_path
+    expect(current_path).to eq question_path(question)
     expect(page).to_not have_content answer.first.body
   end
 
