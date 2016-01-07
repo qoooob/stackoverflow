@@ -5,10 +5,18 @@
 <p><%= link_to 'Delete', @question, method: :delete %></p>
 <% end %>
 
-<div class="answers">
-  <p class="answers-count">Answers count: <%= @question.answers.count %></p>
-      <%= render @question.answers %>
-</div>
+<!--<div class="answers">-->
+  <!--<p class="answers-count">Answers count: <%= @question.answers.count %></p>-->
+      <!--<%= render @question.answers %>-->
+<!--</div>-->
+
+<% @question.answers.each do |answer| %>
+    <p><%= answer.body %></p>
+
+    <% if current_user && current_user.author_of?(answer) %>
+      <p><%= link_to 'Delete Answer', answer, method: :delete %></p>
+    <% end %>
+<% end %>
 
 <%= form_for [@question, Answer.new], remote: true do |f| %>
     <%= f.label :body, 'Your answer' %>
