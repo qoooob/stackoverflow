@@ -17,14 +17,27 @@ feature 'Create answer', %q{
     click_on 'Create answer'
 
     expect(current_path).to eq question_path(question)
+    # within '.answers' do
+    #   expect(page).to have_content "Answer Body"
+    # end
   end
 
   scenario 'Non-authenticated user tries to create answer' do
     visit question_path(question)
-
     click_on 'Create answer'
 
     expect(page).to have_content 'You need to sign in or sign up before continuing.'
     expect(current_path).to eq new_user_session_path
+  end
+
+  scenario 'User tries to create invalid answer', js: true do
+    login(user)
+
+    visit question_path(question)
+    click_on 'Create answer'
+
+    within '.answer-errors' do
+      expect(page).to have_content "Body can't be blank"
+    end
   end
 end

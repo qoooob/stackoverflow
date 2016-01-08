@@ -1,11 +1,7 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!, except: [:show]
-  before_action :set_question, only: [:new, :create]
+  before_action :set_question, only: [:create]
   before_action :set_answer, only: [:edit, :update, :destroy]
-
-  def new
-    @answer = Answer.new
-  end
 
   def edit
   end
@@ -14,7 +10,6 @@ class AnswersController < ApplicationController
     @answer = @question.answers.create(answer_params)
     @answer.user = current_user
     if @answer.save
-       # redirect_to @question, notice: 'Your answer successfully create'
     else
       render :create
     end
@@ -34,7 +29,6 @@ class AnswersController < ApplicationController
 
   def destroy
     @answer.destroy if current_user.author_of?(@answer)
-    redirect_to @answer.question
   end
 
   private

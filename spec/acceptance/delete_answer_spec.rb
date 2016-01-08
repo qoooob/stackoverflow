@@ -5,7 +5,7 @@ feature 'Delete Answer' do
   given(:question) { create(:question, user: user) }
   given!(:answer) { create_list(:answer, 1, question: question, user: user) }
 
-  scenario 'Author can delete his answer' do
+  scenario 'Author can delete his answer', js: true do
     login(user)
     visit question_path(question)
 
