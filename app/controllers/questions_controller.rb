@@ -7,6 +7,10 @@ class QuestionsController < ApplicationController
   end
 
   def show
+    respond_to do |format|
+      format.html
+      format.json { render json: @question }
+    end
   end
 
   def new
@@ -27,16 +31,18 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    if current_user.author_of?(@question)
-      if @question.update(question_params)
-        redirect_to @question, notice: 'Your question successfully updated'
+    respond_to do |format|
+      if current_user.author_of?(@question)
+        if @question.update(question_params)
+          format.html { redirect_to @question, notice: 'Your question successfully updated' }
+          format.json { render json: @question }
+        else
+          format.html { render :edit }
+        end
       else
-        render :edit
+        format.html { redirect_to @question }
       end
-    else
-      redirect_to @question
     end
-
   end
 
   def destroy

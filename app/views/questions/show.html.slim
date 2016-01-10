@@ -1,16 +1,23 @@
+- hidden = true
 h1= @question.title
-p= @question.body
+h2= @question.body
 - if current_user && current_user.author_of?(@question)
+  = form_for (@question), html: { style: "display: #{hidden ? 'none' : 'block'}" }, remote: true, format: :json do |f|
+    div class="field"
+      =f.text_area :body
+    div class="actions"
+      =f.submit 'Save Question'
   p
-    = link_to 'Edit Question', edit_question_path(@question)
+    = link_to 'Edit Question', '#', class: 'edit_question_link'
     |    |
     = link_to 'Delete', @question, method: :delete, data: { confirm: 'Are you sure?' }
+
 .answers
   p.answers-count
     | Answers count: #{@question.answers.count}
   = render @question.answers
 .answer-errors
-= form_for [@question, Answer.new], remote: true do |f|
+= form_for [@question, Answer.new], remote: true, format: :json do |f|
   = f.label :body, 'Your answer:'
   = f.text_field :body
   = f.submit 'Create answer'

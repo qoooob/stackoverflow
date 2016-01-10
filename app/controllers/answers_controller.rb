@@ -4,26 +4,41 @@ class AnswersController < ApplicationController
   before_action :set_answer, only: [:edit, :update, :destroy]
 
   def edit
+    respond_to do |format|
+      format.json { render json: @answer}
+      format.html { redirect_to :edit }
+    end
   end
 
   def create
-    @answer = @question.answers.create(answer_params)
+    @answer = @question.answers.new(answer_params)
     @answer.user = current_user
-    if @answer.save
-    else
-      render :create
+
+    respond_to do |format|
+      if @answer.save
+        format.html { redirect_to @question }
+        format.js
+        format.json { render json: { answers_count: @question.answers.count, answer: @answer } }
+      else
+        format.html { render :create }
+        format.js
+        format.json { render json: @answer.errors.full_messages, status: :unprocessable_entity }
+      end
     end
   end
 
   def update
-    if current_user.author_of?(@answer)
-      if @answer.update(answer_params)
-        redirect_to @answer.question, notice: 'Your answer successfully updated'
+    respond_to do |format|
+      if current_user.author_of?(@answer)
+        if @answer.update(answer_params)
+          format.html { redirect_to @answer.question, notice: 'Your answer successfully updated' }
+          format.json { render json: @answer}
+        else
+          format.html { render :edit }
+        end
       else
-        render :edit
+        format.html { redirect_to @answer.question }
       end
-    else
-      redirect_to @answer.question
     end
   end
 

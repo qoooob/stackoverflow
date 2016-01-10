@@ -25,6 +25,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 gem 'slim-rails'
+gem 'private_pub'
+gem 'thin'
 
 group :development, :test do
   # Access an IRB console on exception pages or by using <%= console %> in views
