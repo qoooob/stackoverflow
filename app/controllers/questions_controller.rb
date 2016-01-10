@@ -24,6 +24,8 @@ class QuestionsController < ApplicationController
     @question = Question.new(question_params)
     @question.user = current_user
     if @question.save
+      response = {question: @question}
+      PrivatePub.publish_to "/questions", response: response
       redirect_to @question, notice: 'Your question successfully create'
     else
       render :new
