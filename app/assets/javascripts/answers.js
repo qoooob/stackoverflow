@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $('a.edit_answer_link').click(function(){
+    $(document).on('click', 'a.edit_answer_link', (function(){
         var answer_id = $(this).data('answerId');
         console.log(answer_id);
         var form = $('#edit_answer_' + answer_id);
@@ -12,10 +12,10 @@ $(document).ready(function() {
             $(this).html('Cancel');
             $(this).addClass('cancel');
         };
-        $('.edit_answer_'+ answer_id).toggle();
+
         form.toggle();
         body.toggle();
-    });
+    }));
 
     $('form.edit_answer').bind('ajax:success',
         function(e, data, status, xhr){
@@ -68,6 +68,6 @@ $(document).ready(function() {
 
         $('.answers-count').html('Answers count:' + answers_count);
         $('.answers').append('<div class="answer" id="answer_' + answer.id
-            + '\"><p>' + answer.body + '</p></div>');
+            + '\" data-answer-id="' + answer.id + '"><p>' + answer.body + '</p><p><a class="edit_answer_link" href = "#">Edit Answer</a></p></div>');
     });
 });

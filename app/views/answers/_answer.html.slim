@@ -8,6 +8,6 @@
       div class="actions"
         = f.submit 'Save Answer'
     p
-      = link_to 'Edit Answer', '#', class: 'edit_answer_link'
+      = link_to 'Edit Answer', '#', class: 'edit_answer_link', data: {answer_id: answer.id}
       |    |
       = link_to 'Delete Answer', answer,  class: 'delete_answer_link', method: :delete, data: { confirm: 'Are you sure?'}, remote: true

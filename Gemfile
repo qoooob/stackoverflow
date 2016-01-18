@@ -27,6 +27,7 @@ gem 'devise'
 gem 'slim-rails'
 gem 'private_pub'
 gem 'thin'
+gem 'carrierwave'
 
 group :development, :test do
   # Access an IRB console on exception pages or by using <%= console %> in views
