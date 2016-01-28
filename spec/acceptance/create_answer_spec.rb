@@ -28,10 +28,8 @@ feature 'Create answer', %q{
 
   scenario 'Non-authenticated user tries to create answer', js: true do
     visit question_path(question)
-    click_on 'Create answer'
 
-    expect(page).to have_content 'You need to sign in or sign up before continuing.'
-    expect(current_path).to eq new_user_session_path
+    expect(page).to_not have_button 'Create answer'
   end
 
   scenario 'User tries to create invalid answer', js: true do

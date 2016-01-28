@@ -18,9 +18,10 @@
       | Answers count: #{@question.answers.count}
     = render @question.answers
   .answer-errors
-  = form_for [@question, Answer.new], remote: true, format: :json do |f|
-    = f.label :body, 'Your answer:'
-    = f.text_field :body
-    = f.submit 'Create answer'
+  - if current_user
+    = form_for [@question, Answer.new], remote: true, format: :json do |f|
+      = f.label :body, 'Your answer:'
+      = f.text_field :body
+      = f.submit 'Create answer'
 
 = subscribe_to "/questions/#{@question.id}/answers"

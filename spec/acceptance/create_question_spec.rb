@@ -9,7 +9,7 @@ feature 'Create question', %q{
   given!(:user) { create(:user) }
 
   background do
-    Capybara.current_driver = :selenium
+    #Capybara.current_driver = :selenium
   end
 
   scenario 'Authenticated user create question' do
@@ -17,9 +17,13 @@ feature 'Create question', %q{
 
   visit questions_path
   click_on 'Ask question'
+
+  save_and_open_page
+
   fill_in 'Title', with: 'Test question'
   fill_in 'Text', with: 'text text'
   click_on 'Create question'
+
 
   expect(page).to have_content 'Your question successfully create'
   expect(page).to have_content 'Test question'
