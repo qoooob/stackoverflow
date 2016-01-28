@@ -9,6 +9,10 @@ feature 'Create answer', %q{
   given(:user) { create(:user) }
   given!(:question) { create(:question)}
 
+  background do
+    Capybara.current_driver = :selenium
+  end
+
   scenario 'Authenticated user create answer', js: true do
     login(user)
 
@@ -22,7 +26,7 @@ feature 'Create answer', %q{
     # end
   end
 
-  scenario 'Non-authenticated user tries to create answer' do
+  scenario 'Non-authenticated user tries to create answer', js: true do
     visit question_path(question)
     click_on 'Create answer'
 

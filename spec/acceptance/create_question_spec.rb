@@ -8,6 +8,10 @@ feature 'Create question', %q{
 
   given!(:user) { create(:user) }
 
+  background do
+    Capybara.current_driver = :selenium
+  end
+
   scenario 'Authenticated user create question' do
   login(user)
 
