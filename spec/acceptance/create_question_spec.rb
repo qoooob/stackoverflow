@@ -18,8 +18,6 @@ feature 'Create question', %q{
   visit questions_path
   click_on 'Ask question'
 
-  save_and_open_page
-
   fill_in 'Title', with: 'Test question'
   fill_in 'Text', with: 'text text'
   click_on 'Create question'

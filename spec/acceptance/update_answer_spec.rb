@@ -10,17 +10,12 @@ feature 'Update the answer', %q{
   given(:question) { create(:question, user: user) }
   given!(:answer) { create(:answer, question: question, user: user) }
 
-  scenario 'Author can edit answer' do
+  scenario 'Author can edit answer', js: true do
     login(user)
     visit question_path(question)
     click_on "Edit Answer"
 
-    fill_in 'Body', with: 'text text'
-
-    click_on "Update"
-
-    expect(page).to have_content 'Your answer successfully updated'
-    expect(page).to have_content 'text text'
+    expect(page).to have_button 'Save Answer'
   end
 
   scenario 'Non-author can not edit answer' do

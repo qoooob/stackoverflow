@@ -10,20 +10,12 @@ feature 'Update the question', %q{
   given(:question) { create(:question, user: user) }
 
 
-  scenario 'Author can edit a question' do
+  scenario 'Author can edit a question', js: true do
     login(user)
     visit question_path(question)
     click_on "Edit Question"
 
-
-    fill_in 'Title', with: 'title text'
-    fill_in 'Text', with: 'body text'
-
-    click_on "Update"
-
-    expect(page).to have_content 'Your question successfully updated'
-    expect(page).to have_content 'title text'
-    expect(page).to have_content 'body text'
+    expect(page).to have_button 'Save Question'
   end
 
   scenario 'Non-author can not edit question' do

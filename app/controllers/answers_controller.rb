@@ -4,10 +4,10 @@ class AnswersController < ApplicationController
   before_action :set_answer, only: [:edit, :update, :destroy]
 
   def edit
-    respond_to do |format|
-      format.json { render json: @answer}
-      format.html { redirect_to :edit }
-    end
+    # respond_to do |format|
+    #   format.json { render json: @answer}
+    #   format.html { redirect_to :edit }
+    # end
   end
 
   def create
