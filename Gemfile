@@ -24,6 +24,12 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
+gem 'slim-rails'
+gem 'private_pub'
+gem 'thin'
+gem 'carrierwave'
+gem 'omniauth'
+gem 'omniauth-facebook'
 
 group :development, :test do
   # Access an IRB console on exception pages or by using <%= console %> in views
@@ -37,6 +43,7 @@ group :development, :test do
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'database_cleaner'
+  gem 'poltergeist'
 end
 
 group :test do
