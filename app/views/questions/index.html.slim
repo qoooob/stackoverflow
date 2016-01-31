@@ -1,5 +1,6 @@
 h1 All Questions
-= link_to 'Ask question', new_question_path
+- if can?(:craete, Question)
+  = link_to 'Ask question', new_question_path
 .questions
   = render 'form'
 

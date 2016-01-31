@@ -1,7 +1,7 @@
 - hidden = true
 = div_for answer do
   h4= answer.body
-  - if current_user && current_user.author_of?(answer)
+  - if can?(:manage, answer)
     = form_for (answer), html: { style: "display: #{hidden ? 'none' : 'block'}" }, remote: true, format: :json do |f|
       div class="field"
         = f.text_area :body

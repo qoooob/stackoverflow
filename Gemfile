@@ -30,6 +30,7 @@ gem 'thin'
 gem 'carrierwave'
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'cancancan'
 
 group :development, :test do
   # Access an IRB console on exception pages or by using <%= console %> in views

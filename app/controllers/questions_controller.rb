@@ -2,6 +2,8 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_question, only: [:show, :edit, :update, :destroy]
 
+  authorize_resource
+
   def index
     @questions = Question.all
   end
@@ -34,21 +36,18 @@ class QuestionsController < ApplicationController
 
   def update
     respond_to do |format|
-      if current_user.author_of?(@question)
-        if @question.update(question_params)
-          format.html { redirect_to @question, notice: 'Your question successfully updated' }
-          format.json { render json: @question }
-        else
-          format.html { render :edit }
-        end
+      if @question.update(question_params)
+        format.html { redirect_to @question, notice: 'Your question successfully updated' }
+        format.json { render json: @question }
       else
-        format.html { redirect_to @question }
+        format.html { render :edit }
+        format.json { render @question.errors.full_messages, status: :unprocessable_entity }
       end
     end
   end
 
   def destroy
-    @question.destroy if current_user.author_of?(@question)
+    @question.destroy
     redirect_to questions_path
   end
 

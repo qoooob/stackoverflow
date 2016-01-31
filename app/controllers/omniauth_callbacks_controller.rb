@@ -1,4 +1,5 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  skip_authorization_check # можно использовать only: or exept:
 
   def facebook
     # render json: request.env['omniauth.auth']
