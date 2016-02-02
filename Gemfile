@@ -31,6 +31,7 @@ gem 'carrierwave'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'cancancan'
+gem 'doorkeeper'
 
 group :development, :test do
   # Access an IRB console on exception pages or by using <%= console %> in views
@@ -51,6 +52,7 @@ group :test do
   gem 'shoulda-matchers', '~>3.0'
   gem 'factory_girl_rails'
   gem 'launchy'
+  gem 'json_spec'
 end
 
 group :development do
