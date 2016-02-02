@@ -14,10 +14,6 @@ RSpec.describe AnswersController, type: :controller do
     it 'edit answer' do
       expect(assigns(:answer)).to eq answer
     end
-
-    it 'renders edit template' do
-      expect(response).to render_template :edit
-    end
   end
 
   describe "POST #create" do
