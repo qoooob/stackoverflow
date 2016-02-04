@@ -32,6 +32,7 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'cancancan'
 gem 'doorkeeper'
+gem 'active_model_serializers'
 
 group :development, :test do
   # Access an IRB console on exception pages or by using <%= console %> in views

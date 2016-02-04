@@ -26,6 +26,7 @@ class Ability
     guest_abilities
 
     can :manage, [ Question, Answer], user_id: user.id
+    can :me, User, id: user.id
     # или так:
     # can :destroy, Question do |object|
     #   object.user_id == user.id
