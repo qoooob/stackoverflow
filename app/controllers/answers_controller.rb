@@ -3,6 +3,8 @@ class AnswersController < ApplicationController
   before_action :set_question, only: [:create]
   before_action :set_answer, only: [:edit, :update, :destroy]
 
+  authorize_resource
+
   def edit
     # respond_to do |format|
     #   format.json { render json: @answer}
@@ -34,21 +36,17 @@ class AnswersController < ApplicationController
 
   def update
     respond_to do |format|
-      if current_user.author_of?(@answer)
-        if @answer.update(answer_params)
-          format.html { redirect_to @answer.question, notice: 'Your answer successfully updated' }
-          format.json { render json: @answer}
-        else
-          format.html { render :edit }
-        end
+      if @answer.update(answer_params)
+        format.html { redirect_to @answer.question, notice: 'Your answer successfully updated' }
+        format.json { render json: @answer}
       else
-        format.html { redirect_to @answer.question }
+        format.html { render :edit }
       end
     end
   end
 
   def destroy
-    @answer.destroy if current_user.author_of?(@answer)
+    @answer.destroy
   end
 
   private

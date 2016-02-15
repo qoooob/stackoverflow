@@ -2,7 +2,7 @@
   - hidden = true
   h1= @question.title
   h2= @question.body
-  - if current_user && current_user.author_of?(@question)
+  - if can?(:manage, @question)
     = form_for (@question), html: { style: "display: #{hidden ? 'none' : 'block'}" }, remote: true, format: :json do |f|
       div class="field"
         =f.text_area :body
@@ -18,7 +18,7 @@
       | Answers count: #{@question.answers.count}
     = render @question.answers
   .answer-errors
-  - if current_user
+  - if can?(:create, Answer)
     = form_for [@question, Answer.new], remote: true, format: :json do |f|
       = f.label :body, 'Your answer:'
       = f.text_field :body
